@@ -7,10 +7,12 @@ const Node = struct {
 
 const List = struct {
     head: ?*Node = null,
+    len: usize = 0,
 
     pub fn push(self: *List, node: *Node) void {
         if (self.head == null) {
             self.head = node;
+            self.incrementLen();
             return;
         }
 
@@ -18,6 +20,7 @@ const List = struct {
         while (temp != null) {
             if (temp.?.next == null) {
                 temp.?.next = node;
+                self.incrementLen();
                 return;
             }
 
@@ -25,13 +28,17 @@ const List = struct {
         }
     }
 
-    pub fn printList(self: List) void {
+    pub fn printList(self: *List) void {
         var temp: ?*Node = self.head;
 
         while (temp != null) {
             std.debug.print("Node Value: {any}\n", .{temp.?.value});
             temp = temp.?.next;
         }
+    }
+
+    pub fn incrementLen(self: *List) void {
+        self.len += 1;
     }
 };
 
@@ -45,4 +52,6 @@ pub fn main() void {
     linkedList.push(&n2);
 
     linkedList.printList();
+
+    std.debug.print("Len: {any}\n", .{linkedList.len});
 }
