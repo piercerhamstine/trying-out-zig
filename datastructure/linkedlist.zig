@@ -28,6 +28,10 @@ const List = struct {
         }
     }
 
+    pub fn peek(self: *List) ?*Node {
+        return self.head;
+    }
+
     pub fn printList(self: *List) void {
         var temp: ?*Node = self.head;
 
@@ -53,5 +57,5 @@ pub fn main() void {
 
     linkedList.printList();
 
-    std.debug.print("Len: {any}\n", .{linkedList.len});
+    std.debug.print("Peek: {any}\n", .{linkedList.peek().?.value});
 }
