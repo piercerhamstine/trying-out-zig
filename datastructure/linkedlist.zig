@@ -39,7 +39,17 @@ const List = struct {
     }
 
     pub fn pop_back(self: *List) ?*Node {
-        _ = self;
+        if (self.head == null) {
+            return self.head;
+        }
+
+        var temp: ?*Node = self.head;
+
+        while (temp.?.next != null) {
+            temp = temp.?.next;
+        }
+
+        return temp;
     }
 
     pub fn peek(self: *List) ?*Node {
@@ -69,10 +79,8 @@ pub fn main() void {
     linkedList.push(&n1);
     linkedList.push(&n2);
 
-    var n3: ?*Node = linkedList.pop_front();
-    _ = n3;
-    var n4: ?*Node = linkedList.pop_front();
+    var n3: ?*Node = linkedList.pop_back();
     linkedList.printList();
 
-    std.debug.print("Pop: {any}\n", .{n4.?.value});
+    std.debug.print("Back: {any}\n", .{n3.?.value});
 }
