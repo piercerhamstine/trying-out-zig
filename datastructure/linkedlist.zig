@@ -28,6 +28,10 @@ const List = struct {
         }
     }
 
+    pub fn push_back(self: *List) void {
+        _ = self;
+    }
+
     pub fn pop_front(self: *List) ?*Node {
         var temp: ?*Node = self.head;
 
