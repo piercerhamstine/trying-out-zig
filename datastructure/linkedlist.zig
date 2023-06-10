@@ -28,8 +28,11 @@ const List = struct {
         }
     }
 
-    pub fn push_back(self: *List) void {
-        _ = self;
+    pub fn push_front(self: *List, node: *Node) void {
+        var temp: ?*Node = self.head;
+
+        self.head = node;
+        self.head.?.next = temp;
     }
 
     pub fn pop_front(self: *List) ?*Node {
@@ -81,10 +84,11 @@ pub fn main() void {
     var n2 = Node{ .value = 1 };
 
     linkedList.push(&n1);
-    linkedList.push(&n2);
+    linkedList.push_front(&n2);
+    // linkedList.push(&n2);
 
-    var n3: ?*Node = linkedList.pop_back();
+    // var n3: ?*Node = linkedList.pop_back();
     linkedList.printList();
 
-    std.debug.print("Back: {any}\n", .{n3.?.value});
+    // std.debug.print("Back: {any}\n", .{n3.?.value});
 }
