@@ -75,6 +75,10 @@ const List = struct {
     pub fn incrementLen(self: *List) void {
         self.len += 1;
     }
+
+    pub fn decrementLen(self: *List) void {
+        self.len -= 1;
+    }
 };
 
 pub fn main() void {
